@@ -1,5 +1,46 @@
 # Lista para almacenar clientes en memoria
-clientes = []
+clientes = [
+    {
+        "nombre": "Juan Pérez",
+        "telefono": "956565656",
+        "email": "juan.perez@email.com"
+    },
+    {
+        "nombre": "María García",
+        "telefono": "945454545",
+        "email": "maria.garcia@email.com"
+    },
+    {
+        "nombre": "Carlos López",
+        "telefono": "932323232",
+        "email": "carlos.lopez@email.com"
+    },
+    {
+        "nombre": "Ana Rodríguez",
+        "telefono": "987878787",
+        "email": "ana.rodriguez@email.com"
+    },
+    {
+        "nombre": "Luis Martínez",
+        "telefono": "971717171",
+        "email": "luis.martinez@email.com"
+    },
+    {
+        "nombre": "Sofia Herrera",
+        "telefono": "982828282",
+        "email": "sofia.herrera@email.com"
+    },
+    {
+        "nombre": "Roberto Silva",
+        "telefono": "919191919",
+        "email": "roberto.silva@email.com"
+    },
+    {
+        "nombre": "Carmen Vargas",
+        "telefono": "963636363",
+        "email": "carmen.vargas@email.com"
+    }
+]
 
 def menu_clientes():
     while True:
