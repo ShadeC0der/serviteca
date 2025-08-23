@@ -61,13 +61,31 @@ def menu_clientes():
         elif opcion == "4":
             break
         else:
-            print("Opción no válida. Intenta de nuevo.")
+            print("Elige una opcion valida, entre 1 y 4")
 
 def agregar_cliente():
     print("\n--- AGREGAR CLIENTE ---")
-    nombre = input("Nombre: ")
-    telefono = input("Teléfono: ")
-    email = input("Email: ")
+    
+    # Validar nombre
+    while True:
+        nombre = input("Nombre: ").strip()
+        if nombre:
+            break
+        print("Ingresa un nombre valido")
+    
+    # Validar teléfono
+    while True:
+        telefono = input("Teléfono: ").strip()
+        if telefono:
+            break
+        print("Ingresa un telefono valido")
+    
+    # Validar email
+    while True:
+        email = input("Email: ").strip()
+        if email:
+            break
+        print("Ingresa un email valido")
     
     cliente = {
         "nombre": nombre,
