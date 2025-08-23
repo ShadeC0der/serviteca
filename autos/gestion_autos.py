@@ -464,7 +464,7 @@ def ejemplo_uso():
     gestion = GestionAutos(cargar_datos_estaticos=True)
     print(f"Se cargaron {gestion.obtener_cantidad()} autos desde datos estáticos")
     
-    # 1. DEMOSTRAR AGREGAR AUTO (0.5 pts)
+    # 1. DEMOSTRAR AGREGAR AUTO
     print("\n" + "="*50)
     print("1. FUNCIÓN AGREGAR AUTO")
     print("="*50)
@@ -481,7 +481,7 @@ def ejemplo_uso():
     resultado = gestion.agregar_auto("123", "Modelo", "Rojo", 2024, "Marca")
     print(f"Resultado: {resultado['mensaje']}")
     
-    # 2. DEMOSTRAR LISTAR AUTOS (0.5 pts)
+    # 2. DEMOSTRAR LISTAR AUTOS
     print("\n" + "="*50)
     print("2. FUNCIÓN LISTAR AUTOS")
     print("="*50)
@@ -495,7 +495,7 @@ def ejemplo_uso():
     print("\nFormato tabla:")
     print(gestion.listar_autos('tabla'))
     
-    # 3. DEMOSTRAR BUSCAR AUTO (0.5 pts)
+    # 3. DEMOSTRAR BUSCAR AUTO
     print("\n" + "="*50)
     print("3. FUNCIÓN BUSCAR AUTO")
     print("="*50)
@@ -537,9 +537,9 @@ def menu_interactivo():
         print("\n" + "="*60)
         print("           GESTIÓN DE AUTOS - MENÚ PRINCIPAL")
         print("="*60)
-        print("1. ✅ Agregar auto (0.5 pts)")
-        print("2. ✅ Listar autos (0.5 pts)")
-        print("3. ✅ Buscar auto (0.5 pts)")
+        print("1. Agregar auto")
+        print("2. Listar autos")
+        print("3. Buscar auto")
         print("4. Modificar auto")
         print("5. Eliminar auto")
         print("6. Ver estadísticas")
