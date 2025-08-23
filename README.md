@@ -2,4 +2,4 @@
 - Chistian Gutierrez
 - Ismael Aguila
 - Benjamin Velasquez
-- Jonathan Gallardo
+- JONATHAN GALLARDO
