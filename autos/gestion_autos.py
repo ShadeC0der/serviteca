@@ -78,23 +78,6 @@ class GestionAutos:
     def buscar_por_marca(self, marca):
         return [auto for auto in self.autos if auto.marca and auto.marca.lower() == marca.lower()]
 
-    def modificar_auto(self, patente, **kwargs):
-        auto = self.buscar_por_patente(patente)
-        if not auto:
-            return False
-        
-        for key, value in kwargs.items():
-            if hasattr(auto, key):
-                setattr(auto, key, value)
-        return True
-
-    def eliminar_auto(self, patente):
-        auto = self.buscar_por_patente(patente)
-        if auto:
-            self.autos.remove(auto)
-            return True
-        return False
-
     def listar_todos(self):
         return self.autos.copy()
 
@@ -105,7 +88,7 @@ class GestionAutos:
         if not self.autos:
             return "No hay autos registrados."
         
-        resultado = f"=== LISTADO DE AUTOS ({len(self.autos)} total) ===\n"
+        resultado = f"Total de autos: {len(self.autos)}\n"
         for i, auto in enumerate(self.autos, 1):
             resultado += f"{i}. {auto}\n"
         return resultado
@@ -129,31 +112,27 @@ class GestionAutos:
         if not resultados:
             return f"No se encontraron autos con {criterio}: '{valor}'"
         
-        resultado = f"=== RESULTADOS ({len(resultados)} encontrados) ===\n"
+        resultado = f"Resultados encontrados: {len(resultados)}\n"
         for i, auto in enumerate(resultados, 1):
             resultado += f"{i}. {auto}\n"
         return resultado
 
 
-def menu_principal():
-    gestion = GestionAutos()
-    
+# Instancia global
+gestion_autos = GestionAutos()
+
+
+def menu_autos():
     while True:
         print("\n=== GESTIÓN DE AUTOS ===")
         print("1. Agregar auto")
         print("2. Listar autos")
         print("3. Buscar auto")
-        print("4. Modificar auto")
-        print("5. Eliminar auto")
-        print("0. Salir")
+        print("4. Volver al menú principal")
         
-        opcion = input("\nSeleccione una opción: ").strip()
+        opcion = input("Elige una opción: ").strip()
         
-        if opcion == "0":
-            print("¡Hasta luego!")
-            break
-            
-        elif opcion == "1":
+        if opcion == "1":
             print("\n--- AGREGAR AUTO ---")
             patente = input("Patente: ").strip()
             modelo = input("Modelo: ").strip()
@@ -161,12 +140,26 @@ def menu_principal():
             año_str = input("Año (opcional): ").strip()
             marca = input("Marca (opcional): ").strip()
             
-            año = int(año_str) if año_str else None
-            resultado = gestion.agregar_auto(patente, modelo, color, año, marca)
+            # Validación para entradas vacías
+            if not patente or not modelo or not color:
+                print("Error: La patente, modelo y color son obligatorios")
+                continue
+            
+            # Manejo de errores para el año
+            año = None
+            if año_str:
+                try:
+                    año = int(año_str)
+                except ValueError:
+                    print("Error: El año debe ser un número válido")
+                    continue
+            
+            resultado = gestion_autos.agregar_auto(patente, modelo, color, año, marca)
             print(f"Resultado: {resultado['mensaje']}")
             
         elif opcion == "2":
-            print(gestion.listar_autos())
+            print("\n--- LISTAR AUTOS ---")
+            print(gestion_autos.listar_autos())
             
         elif opcion == "3":
             print("\n--- BUSCAR AUTO ---")
@@ -175,41 +168,23 @@ def menu_principal():
             print("3. Por color")
             print("4. Por marca")
             
-            sub_opcion = input("Seleccione criterio: ").strip()
+            sub_opcion = input("Elige una opción: ").strip()
             criterios = {"1": "patente", "2": "modelo", "3": "color", "4": "marca"}
             
             if sub_opcion in criterios:
                 valor = input(f"Ingrese {criterios[sub_opcion]}: ").strip()
-                print(gestion.buscar_auto(criterios[sub_opcion], valor))
+                if not valor:
+                    print("Error: El valor de búsqueda no puede estar vacío")
+                    continue
+                print(gestion_autos.buscar_auto(criterios[sub_opcion], valor))
             else:
                 print("Opción inválida")
                 
         elif opcion == "4":
-            print("\n--- MODIFICAR AUTO ---")
-            patente = input("Patente del auto: ").strip()
-            modelo = input("Nuevo modelo (vacío para no cambiar): ").strip()
-            color = input("Nuevo color (vacío para no cambiar): ").strip()
-            
-            kwargs = {}
-            if modelo: kwargs['modelo'] = modelo
-            if color: kwargs['color'] = color
-            
-            if gestion.modificar_auto(patente, **kwargs):
-                print("Auto modificado exitosamente")
-            else:
-                print("No se encontró el auto")
-                
-        elif opcion == "5":
-            print("\n--- ELIMINAR AUTO ---")
-            patente = input("Patente del auto: ").strip()
-            if gestion.eliminar_auto(patente):
-                print("Auto eliminado exitosamente")
-            else:
-                print("No se encontró el auto")
-                
+            break
         else:
             print("Opción inválida")
 
 
 if __name__ == "__main__":
-    menu_principal()
+    menu_autos()
