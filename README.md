@@ -1,5 +1,5 @@
 # Integrantes
-- Chistian Gutierrez
+- Christian Gutierrez
 - Ismael Aguila
 - Benjamin Velasquez
 - Jonathan Gallardo
