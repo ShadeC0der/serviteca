@@ -1,4 +1,6 @@
 from autos.gestion_autos import menu_autos
+from clientes.gestion_clientes import menu_clientes
+from servicios.gestion_servicios import menu_servicios
 
 def menu_principal():
     while True:
@@ -13,9 +15,9 @@ def menu_principal():
         if opcion == "1":
             menu_autos()
         elif opcion == "2":
-            print("Módulo en desarrollo...")
+            menu_clientes()
         elif opcion == "3":
-            print("Módulo en desarrollo...")
+            menu_servicios()
         elif opcion == "4":
             print("Hasta luego!")
             break
