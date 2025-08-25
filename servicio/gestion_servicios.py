@@ -1,4 +1,4 @@
-# servicios.py
+# gestion_servicios.py
 from datetime import datetime
 
 # ========================
@@ -96,8 +96,33 @@ def listar_servicios():
     for s in servicios:
         print(f"{s['id']:<3} {s['fecha']:<11} {s['patente']:<8} {s['rut']:<10} {s['tipo']:<18} {format_clp(s['total'])}")
 
-def boleta_servicio():
+def buscar_servicios_por_auto():
     """Item 3"""
+    if not servicios:
+        print("\nNo hay servicios registrados.")
+        return
+
+    patente = input_no_vacio("Patente a buscar: ").upper()
+    encontrados = [s for s in servicios if s.get("patente","").upper() == patente]
+
+    if not encontrados:
+        print(f"\nNo se encontraron servicios para la patente: {patente}")
+        return
+
+    print(f"\n=== SERVICIOS PARA {patente} ({len(encontrados)} encontrado(s)) ===")
+    print(f"{'ID':<4} {'FECHA':<12} {'TIPO':<18} {'TOTAL':>12}")
+    print("-"*50)
+
+    total_patente = 0
+    for s in encontrados:
+        total_patente += float(s.get("total", 0) or 0)
+        print(f"{s['id']:<4} {s['fecha']:<12} {s['tipo']:<18} {format_clp(s['total']):>12}")
+
+    print("-"*50)
+    print(f"{'TOTAL ACUMULADO:':>34} {format_clp(total_patente):>12}")
+
+def boleta_servicio():
+    """Item 4"""
     if not servicios:
         print("\nNo hay servicios registrados.")
         return
@@ -132,13 +157,15 @@ def menu_servicios():
         print("\n=== MENÚ SERVICIOS ===")
         print("1) Registrar servicio")
         print("2) Listar servicios")
-        print("3) Boleta por ID")
-        print("4) Salir")
+        print("3) Buscar servicios por auto")
+        print("4) Boleta por ID")
+        print("5) Salir")
         op = input("Opción: ").strip()
         if op=="1": registrar_servicio()
         elif op=="2": listar_servicios()
-        elif op=="3": boleta_servicio()
-        elif op=="4": break
+        elif op=="3": buscar_servicios_por_auto()
+        elif op=="4": boleta_servicio()
+        elif op=="5": break
         else: print("Opción inválida.")
 
 # ========================
